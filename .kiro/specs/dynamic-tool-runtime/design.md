@@ -94,12 +94,34 @@ interface ToolManager {
 3. **Resource Analysis**: Memory and CPU usage estimation
 4. **Compliance Checking**: Policy and governance rule validation
 
+**Implementation Libraries**:
+
+**Python Validation**:
+- **`ast`** (built-in) - Parse Python code into AST for syntax validation and analysis
+- **`bandit`** - Industry-standard security-focused static analysis tool
+- **`radon`** - Cyclomatic complexity and maintainability metrics
+- Custom AST traversal for resource estimation and prohibited operation detection
+
+**JavaScript/TypeScript Validation**:
+- **`acorn`** - Fast, lightweight JavaScript parser
+- **`eslint`** with **`eslint-plugin-security`** - Security-focused linting
+- **`@typescript-eslint/parser`** - TypeScript AST parsing
+- Custom AST traversal for resource estimation
+
+**Validation Strategy**:
+- Use built-in AST parsing for fast syntax validation (< 100ms)
+- Run bandit security scans for Python code (< 200ms)
+- Custom rule engine for domain-specific checks (< 100ms)
+- Lightweight complexity analysis using AST metrics (< 100ms)
+- **Total validation target: < 500ms**
+
 **Prohibited Operations**:
 - File system access outside temp directories
 - Network operations (except approved APIs)
 - Process spawning or system calls
 - Dynamic code execution (eval, exec)
 - Infinite loops or recursive calls
+- Import of dangerous modules (os.system, subprocess, socket, etc.)
 
 **Interface**:
 ```typescript
