@@ -15,9 +15,21 @@ src/
 ├── repositories/        # Data access layer
 │   ├── dynamodb_client.py    # DynamoDB client wrapper
 │   └── tool_repository.py    # Tool CRUD operations
-└── storage/            # Storage layer
-    ├── s3_client.py          # S3 client wrapper
-    └── artifact_storage.py   # Artifact caching service
+├── storage/            # Storage layer
+│   ├── s3_client.py          # S3 client wrapper
+│   └── artifact_storage.py   # Artifact caching service
+├── validation/         # Code validation system
+│   ├── validator.py          # Main validation orchestrator
+│   ├── python_analyzer.py    # Python code analysis
+│   ├── javascript_analyzer.py # JavaScript/TypeScript analysis
+│   ├── security_policy.py    # Security policy definitions
+│   ├── policy_evaluator.py   # Policy evaluation engine
+│   ├── validation_cache.py   # Validation result caching
+│   └── validation_service.py # High-level validation service
+└── agentcore/          # AgentCore integration layer
+    ├── agentcore_client.py   # AgentCore Gateway API client
+    ├── code_interpreter.py   # Bedrock Code Interpreter service
+    └── tool_lifecycle.py     # Tool lifecycle management
 ```
 
 ## Models
@@ -165,11 +177,41 @@ Required environment variables:
 - `S3_BUCKET_NAME`: S3 bucket for code artifacts
 - `AWS_REGION`: AWS region (defaults to us-east-1)
 
+## AgentCore Integration
+
+### AgentCoreClient
+AWS AgentCore Gateway API integration:
+- `register_tool()`: Register tools with AgentCore
+- `deregister_tool()`: Remove tools from AgentCore
+- `discover_tools()`: Query available tools
+- `sync_tool_metadata()`: Synchronize metadata
+- `health_check()`: Verify connectivity
+- `_convert_to_openapi_schema()`: Convert to OpenAPI format
+
+### CodeInterpreterService
+Bedrock Code Interpreter integration:
+- `execute_code()`: Execute tool code in sandbox
+- `validate_execution_environment()`: Verify availability
+- `get_execution_status()`: Check execution progress
+- `cancel_execution()`: Terminate executions
+- `_prepare_code()`: Inject parameters
+- `_submit_execution()`: Submit to Code Interpreter
+- `_poll_execution()`: Poll for completion
+
+### ToolLifecycleManager
+Complete tool lifecycle orchestration:
+- `register_tool()`: Registration workflow with validation and caching
+- `update_tool()`: Update tools with versioning
+- `deregister_tool()`: Deregister with cleanup
+- `get_tool_status()`: Retrieve tool status
+
+See `src/agentcore/README.md` for detailed documentation.
+
 ## Next Steps
 
 The following components need to be implemented:
-1. Code validation system (Task 3)
-2. AgentCore integration layer (Task 4)
+1. ✅ Code validation system (Task 3) - COMPLETED
+2. ✅ AgentCore integration layer (Task 4) - COMPLETED
 3. Tool Manager Lambda function (Task 5)
 4. API Gateway endpoints (Task 6)
 5. Monitoring and observability (Task 7)

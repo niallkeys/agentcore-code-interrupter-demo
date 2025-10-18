@@ -57,20 +57,20 @@
   - Test caching behavior and audit logging functionality
   - _Requirements: 4.1, 4.2, 4.3, 4.4_
 
-- [ ] 4. Implement AgentCore integration layer
-- [ ] 4.1 Create AgentCore Gateway API client
+- [x] 4. Implement AgentCore integration layer
+- [x] 4.1 Create AgentCore Gateway API client
   - Implement tool registration and deregistration with AgentCore
   - Create tool discovery and metadata synchronization methods
   - Add error handling for AgentCore API communication failures
   - _Requirements: 3.1, 3.2, 3.3, 3.5_
 
-- [ ] 4.2 Implement Bedrock Code Interpreter integration
+- [x] 4.2 Implement Bedrock Code Interpreter integration
   - Create service class for Code Interpreter tool execution
   - Implement code submission and result retrieval workflows
   - Add execution monitoring and timeout handling
   - _Requirements: 2.1, 2.2, 2.3, 2.5_
 
-- [ ] 4.3 Build tool lifecycle management
+- [x] 4.3 Build tool lifecycle management
   - Implement tool registration workflow with validation and caching
   - Create tool update and versioning logic
   - Add tool deregistration and cleanup processes
